@@ -20,7 +20,7 @@ struct LandingView: View {
             ForEach(pokemonRepo.pokemons){ pokemon in
               NavigationLink(destination: PokemonView(pokemon: pokemon)) {
                 VStack{
-                  ImageLoader(pokemonImage: pokemon.sprites!.regular)
+                  ImageLoader(image: pokemon.sprites!.regular)
                     .aspectRatio(contentMode: .fit)
                     .shadow(color: .black, radius: 10, x: 0, y: 0)
                   Text(pokemon.name!.fr!)
@@ -30,7 +30,7 @@ struct LandingView: View {
                 .padding()
                 .bold()
                 .frame(width: 175, height: 175)
-                .background(pokemonRepo.getColorFromType(type: pokemon.types[0].name!))
+                .background(pokemon.getColorFromType(type: pokemon.types[0].name!).gradient)
                 .clipShape(.rect(cornerRadius: 10))
               }
             }
