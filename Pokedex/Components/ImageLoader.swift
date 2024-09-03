@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ImageLoader: View {
   
-  let pokemonImage: String
+  let image: String
   
   var body: some View {
-    AsyncImage(url: URL(string: pokemonImage)){ image in
+    AsyncImage(url: URL(string: image)){ image in
       image.image?.resizable()
     }
   }
