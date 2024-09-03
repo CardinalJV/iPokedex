@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import TyradexKit
 
-extension PokemonRepository {
+extension Pokemon {
   func getColorFromType(type: String) -> Color {
     switch type {
       case "Normal", "Vol": return .orange
