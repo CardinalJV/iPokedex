@@ -1,5 +1,5 @@
   //
-  //  ContentView.swift
+  //  LandingView.swift
   //  Pokedex
   //
   //  Created by Jessy Viranaiken on 02/09/2024.
