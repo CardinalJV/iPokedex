@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 import TyradexKit
 
+var favoritesPokemons = [Pokemon]()
+var isTaskRunning = false
+
 extension Pokemon {
   func getColorFromType(type: String) -> Color {
     switch type {
@@ -23,5 +26,11 @@ extension Pokemon {
       case "Électrik", "Psy": return .yellow
       default: return .white
     }
+  }
+  
+  func addInFav() async {
+    isTaskRunning = true
+    favoritesPokemons.append(self)
+    isTaskRunning = false
   }
 }
