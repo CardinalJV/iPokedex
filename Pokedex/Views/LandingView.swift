@@ -45,23 +45,28 @@ struct LandingView: View {
       }
       .padding()
       .ignoresSafeArea(edges: .bottom)
+      .toolbar{
+        ToolbarItem(placement: .topBarLeading) {
+          NavigationLink(destination: FavoritesPokemonsView()) {
+            Image(systemName: "heart.fill")
+              .font(.title3)
+              .tint(.white)
+              .bold()
+          }
+        }
+//        ToolbarItem(placement: .principal) {
+//          Text("Pokedex")
+//            .foregroundStyle(.white)
+//            .bold()
+//        }
+      }
+      .toolbarBackground(.red, for: .navigationBar)
+      .toolbarBackground(.visible, for: .navigationBar)
       .onAppear{
         Task{
           await pokemonRepo.fetchPokemons()
         }
       }
-      .toolbar{
-        ToolbarItem(placement: .topBarLeading) {
-          Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-            Image(systemName: "heart.fill")
-              .font(.title3)
-              .tint(.white)
-              .bold()
-          })
-        }
-      }
-      .toolbarBackground(.red, for: .navigationBar)
-      .toolbarBackground(.visible, for: .navigationBar)
     }
   }
 }
