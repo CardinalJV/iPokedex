@@ -17,6 +17,7 @@
 		A7534AF52C8624060086BC64 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7534AF42C8624060086BC64 /* Pokemon.swift */; };
 		A7A0CBFE2C88BE7E00D51B35 /* PokemonRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A0CBFD2C88BE7E00D51B35 /* PokemonRepo.swift */; };
 		A7C9CB8E2C8779FD00A8FC45 /* StatsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C9CB8D2C8779FD00A8FC45 /* StatsItem.swift */; };
+		A7F0F7A12C8997DB0037BA95 /* FavoritesPokemonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F0F7A02C8997DB0037BA95 /* FavoritesPokemonsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A7534AF42C8624060086BC64 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		A7A0CBFD2C88BE7E00D51B35 /* PokemonRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonRepo.swift; sourceTree = "<group>"; };
 		A7C9CB8D2C8779FD00A8FC45 /* StatsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsItem.swift; sourceTree = "<group>"; };
+		A7F0F7A02C8997DB0037BA95 /* FavoritesPokemonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPokemonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				A7534ADD2C86226D0086BC64 /* LandingView.swift */,
 				A7534AEF2C8623680086BC64 /* PokemonView.swift */,
+				A7F0F7A02C8997DB0037BA95 /* FavoritesPokemonsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7F0F7A12C8997DB0037BA95 /* FavoritesPokemonsView.swift in Sources */,
 				A7534AF02C8623680086BC64 /* PokemonView.swift in Sources */,
 				A7534AF52C8624060086BC64 /* Pokemon.swift in Sources */,
 				A7534ADE2C86226D0086BC64 /* LandingView.swift in Sources */,
