@@ -11,6 +11,8 @@ import TyradexKit
 struct PokemonView: View {
   
   @Environment(\.presentationMode) var presentationMode
+  
+  @State private var showAlert = false
   @State private var showAnimation = false
   
   let pokemon: Pokemon
@@ -36,7 +38,7 @@ struct PokemonView: View {
             }
           }
           .frame(height: 300)
-          .opacity(showAnimation ? 1 : 0)  // Commence invisible, puis devient visible
+          .opacity(showAnimation ? 1 : 0)
           .animation(.easeInOut(duration: 0.4), value: showAnimation)
           /* - */
           VStack(spacing: 10){
@@ -51,7 +53,7 @@ struct PokemonView: View {
               }
             }
             .padding()
-            .opacity(showAnimation ? 1 : 0)  // Commence invisible, puis devient visible
+            .opacity(showAnimation ? 1 : 0)
             .animation(.easeInOut(duration: 0.4).delay(0.1), value: showAnimation)
             /* - */
             /* Composant a propos */
@@ -79,7 +81,7 @@ struct PokemonView: View {
               .background(Color(.systemGray6))
               .clipShape(.rect(cornerRadius: 10))
             }
-            .opacity(showAnimation ? 1 : 0)  // Commence invisible, puis devient visible
+            .opacity(showAnimation ? 1 : 0)
             .animation(.easeInOut(duration: 0.4).delay(0.2), value: showAnimation)
             /* - */
             /* Composant statistiques */
@@ -94,29 +96,56 @@ struct PokemonView: View {
                 StatsItem(name: "Spé.Défense", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.spe_def!)
               }
             }
-            .opacity(showAnimation ? 1 : 0)  // Commence invisible, puis devient visible
+            .opacity(showAnimation ? 1 : 0)
             .animation(.easeInOut(duration: 0.4).delay(0.3), value: showAnimation)
             /* - */
-            Spacer()
-          }
-        }
-        .onAppear{
-          showAnimation = true
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: {
-              presentationMode.wrappedValue.dismiss()  // Action pour revenir en arrière
-            }) {
-              HStack {
-                Image(systemName: "chevron.left")  // Icône de flèche
-                  .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))  // Modifier la couleur de la flèche
-                Text("Retour")  // Optionnel, peut aussi cacher ce texte si tu veux juste la flèche
-                  .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
-              }
-              .bold()
+            HStack{
+              Spacer()
             }
+          }
+          .onAppear{
+            showAnimation = true
+          }
+          .navigationBarBackButtonHidden(true)
+          .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+              Button(action: {
+                presentationMode.wrappedValue.dismiss()  // Action pour revenir en arrière
+              }) {
+                HStack {
+                  Image(systemName: "chevron.left")  // Icône de flèche
+                    .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))  // Modifier la couleur de la flèche
+                  Text("Retour")  // Optionnel, peut aussi cacher ce texte si tu veux juste la flèche
+                    .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
+                }
+                .bold()
+              }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+              Button(action: {
+                showAlert.toggle()
+              }, label: {
+                Image(systemName: "heart.fill")
+                  .font(.title3)
+                  .tint(.red)
+                  .bold()
+              })
+            }
+          }
+          .alert("Favoris", isPresented: $showAlert) {
+            Button(action: {showAlert.toggle()}, label: {
+              Text("Annuler")
+            })
+            Button(action: {
+              Task{
+                await pokemon.addInFav()
+              }
+            }, label: {
+              Text("Ajouter")
+                .bold()
+            })
+          } message: {
+            Text("Voulez-vous ajouter ce pokémon dans vos favoris ?")
           }
         }
       }
