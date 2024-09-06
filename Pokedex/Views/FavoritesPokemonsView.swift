@@ -10,8 +10,6 @@ import TyradexKit
 
 struct FavoritesPokemonsView: View {
   
-  @StateObject private var pokemonRepo: PokemonRepository = .shared
-  
     var body: some View {
       NavigationStack{
         VStack{
@@ -38,11 +36,6 @@ struct FavoritesPokemonsView: View {
           }
         }
         .padding()
-        .onAppear{
-          Task{
-            await pokemonRepo.fetchPokemons()
-          }
-        }
       }
     }
 }
