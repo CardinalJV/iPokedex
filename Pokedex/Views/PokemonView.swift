@@ -110,12 +110,12 @@ struct PokemonView: View {
           .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
               Button(action: {
-                presentationMode.wrappedValue.dismiss()  // Action pour revenir en arrière
+                presentationMode.wrappedValue.dismiss()
               }) {
                 HStack {
-                  Image(systemName: "chevron.left")  // Icône de flèche
-                    .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))  // Modifier la couleur de la flèche
-                  Text("Retour")  // Optionnel, peut aussi cacher ce texte si tu veux juste la flèche
+                  Image(systemName: "chevron.left")
+                    .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
+                  Text("Retour")
                     .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
                 }
                 .bold()
@@ -125,7 +125,7 @@ struct PokemonView: View {
               Button(action: {
                 showAlert.toggle()
               }, label: {
-                Image(systemName: "heart.fill")
+                Image(systemName: pokemon.isInFavorites() ? "heart.slash.fill" : "heart.fill")
                   .font(.title3)
                   .tint(.red)
                   .bold()
@@ -133,19 +133,19 @@ struct PokemonView: View {
             }
           }
           .alert("Favoris", isPresented: $showAlert) {
-            Button(action: {showAlert.toggle()}, label: {
+            Button(action: { showAlert.toggle() }, label: {
               Text("Annuler")
             })
             Button(action: {
-              Task{
-                await pokemon.addInFav()
+              Task {
+                pokemon.isInFavorites() ? await pokemon.deleteInFav() : await pokemon.addInFav()
               }
             }, label: {
-              Text("Ajouter")
+              Text(pokemon.isInFavorites() ? "Supprimer" : "Ajouter")
                 .bold()
             })
           } message: {
-            Text("Voulez-vous ajouter ce pokémon dans vos favoris ?")
+            Text(pokemon.isInFavorites() ? "Voulez-vous supprimer ce pokémon de vos favoris ?" : "Voulez-vous ajouter ce pokémon dans vos favoris ?")
           }
         }
       }
