@@ -46,7 +46,7 @@ struct LandingView: View {
       .padding()
       .ignoresSafeArea(edges: .bottom)
       .toolbar{
-        ToolbarItem(placement: .topBarLeading) {
+        ToolbarItem(placement: .topBarTrailing) {
           NavigationLink(destination: FavoritesPokemonsView()) {
             Image(systemName: "heart.fill")
               .font(.title3)
