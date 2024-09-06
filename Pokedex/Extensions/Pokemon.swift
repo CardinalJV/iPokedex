@@ -33,4 +33,12 @@ extension Pokemon {
     favoritesPokemons.append(self)
     isTaskRunning = false
   }
+  
+  func deleteInFav() async {
+    favoritesPokemons.removeAll(where: { $0.id == self.id})
+  }
+  
+  func isInFavorites() -> Bool {
+    return favoritesPokemons.contains(where: { $0.id == self.id })
+  }
 }
