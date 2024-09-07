@@ -14,6 +14,7 @@ struct PokemonView: View {
   
   @State private var showAlert = false
   @State private var showAnimation = false
+  var favoritePokemon_vm: FavoritePokemonViewModel
   
   let pokemon: Pokemon
   
@@ -125,7 +126,10 @@ struct PokemonView: View {
               Button(action: {
                 showAlert.toggle()
               }, label: {
-                Image(systemName: pokemon.isInFavorites() ? "heart.slash.fill" : "heart.fill")
+                Image(systemName: favoritePokemon_vm.isInFavorites(pokemon: self.pokemon) ?
+                      "heart.fill" :
+                      "heart"
+                )
                   .font(.title3)
                   .tint(.red)
                   .bold()
@@ -138,21 +142,19 @@ struct PokemonView: View {
             })
             Button(action: {
               Task {
-                pokemon.isInFavorites() ? await pokemon.deleteInFav() : await pokemon.addInFav()
+                favoritePokemon_vm.isInFavorites(pokemon: self.pokemon) ?
+                await favoritePokemon_vm.deleteInFav(pokemon: self.pokemon) :
+                await favoritePokemon_vm.addInFav(pokemon: self.pokemon)
               }
             }, label: {
-              Text(pokemon.isInFavorites() ? "Supprimer" : "Ajouter")
+              Text(favoritePokemon_vm.isInFavorites(pokemon: self.pokemon) ? "Supprimer" : "Ajouter")
                 .bold()
             })
           } message: {
-            Text(pokemon.isInFavorites() ? "Voulez-vous supprimer ce pokémon de vos favoris ?" : "Voulez-vous ajouter ce pokémon dans vos favoris ?")
+            Text(favoritePokemon_vm.isInFavorites(pokemon: self.pokemon) ? "Voulez-vous supprimer ce pokémon de vos favoris ?" : "Voulez-vous ajouter ce pokémon dans vos favoris ?")
           }
         }
       }
     }
   }
-}
-
-#Preview {
-  LandingView()
 }
