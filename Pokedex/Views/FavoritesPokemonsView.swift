@@ -1,22 +1,27 @@
-//
-//  FavoritesPokemonsView.swift
-//  Pokedex
-//
-//  Created by Jessy Viranaiken on 05/09/2024.
-//
+  //
+  //  FavoritesPokemonsView.swift
+  //  Pokedex
+  //
+  //  Created by Jessy Viranaiken on 05/09/2024.
+  //
 
 import SwiftUI
 import TyradexKit
 
 struct FavoritesPokemonsView: View {
   
-    var body: some View {
-      NavigationStack{
-        VStack{
+  var favoritePokemon_vm: FavoritePokemonViewModel
+  
+  var body: some View {
+    NavigationStack{
+      VStack{
+        if favoritePokemon_vm.favoritesPokemons.isEmpty {
+          Text("Aucun pokémon favoris pour le moments.")
+        } else {
           ScrollView{
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
-              ForEach(favoritesPokemons){ pokemon in
-                NavigationLink(destination: PokemonView(pokemon: pokemon)) {
+              ForEach(favoritePokemon_vm.favoritesPokemons){ pokemon in
+                NavigationLink(destination: PokemonView(favoritePokemon_vm: favoritePokemon_vm, pokemon: pokemon)) {
                   VStack{
                     ImageLoader(image: pokemon.sprites!.regular)
                       .aspectRatio(contentMode: .fit)
@@ -35,11 +40,9 @@ struct FavoritesPokemonsView: View {
             }
           }
         }
-        .padding()
       }
+      .padding()
+      .toolbarBackground(.red, for: .navigationBar)
     }
-}
-
-#Preview {
-    FavoritesPokemonsView()
+  }
 }
