@@ -10,6 +10,7 @@ import TyradexKit
 
 struct LandingView: View {
   
+  @State var favoritePokemon_vm = FavoritePokemonViewModel()
   @StateObject private var pokemonRepo: PokemonRepository = .shared
   @State private var searchText = ""
   
@@ -24,7 +25,7 @@ struct LandingView: View {
         ScrollView{
           LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
             ForEach(searchText.isEmpty ? pokemonRepo.pokemons : pokemonRepo.sortPokemons(searchText: self.searchText)){ pokemon in
-              NavigationLink(destination: PokemonView(pokemon: pokemon)) {
+              NavigationLink(destination: PokemonView(favoritePokemon_vm: self.favoritePokemon_vm, pokemon: pokemon)) {
                 VStack{
                   ImageLoader(image: pokemon.sprites!.regular)
                     .aspectRatio(contentMode: .fit)
@@ -47,30 +48,33 @@ struct LandingView: View {
       .ignoresSafeArea(edges: .bottom)
       .toolbar{
         ToolbarItem(placement: .topBarTrailing) {
-          NavigationLink(destination: FavoritesPokemonsView()) {
+          NavigationLink(destination: FavoritesPokemonsView(favoritePokemon_vm: self.favoritePokemon_vm)) {
             Image(systemName: "heart.fill")
               .font(.title3)
               .tint(.white)
               .bold()
           }
         }
-//        ToolbarItem(placement: .principal) {
-//          Text("Pokedex")
-//            .foregroundStyle(.white)
-//            .bold()
-//        }
+        ToolbarItem(placement: .principal) {
+          Text("Pokédex")
+            .foregroundStyle(.white)
+            .font(.title3)
+            .bold()
+        }
       }
+      .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(.red, for: .navigationBar)
       .toolbarBackground(.visible, for: .navigationBar)
       .onAppear{
-        Task{
-          await pokemonRepo.fetchPokemons()
+        if pokemonRepo.pokemons.isEmpty {
+          Task{
+            await pokemonRepo.fetchPokemons()
+          }
         }
       }
     }
   }
 }
-
 
 #Preview {
   LandingView()
