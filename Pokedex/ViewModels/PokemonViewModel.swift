@@ -15,10 +15,6 @@ class PokemonViewModel {
   
   var favoritesPokemons = [Pokemon]()
   
-  func getPokemons(pokemons: [Pokemon]) async {
-    self.pokemons = pokemons
-  }
-  
   func addInFav(pokemon: Pokemon) async {
     return favoritesPokemons.append(pokemon)
   }
@@ -33,5 +29,22 @@ class PokemonViewModel {
   
   func sortPokemons(searchText: String) -> [Pokemon] {
     return pokemons.filter { $0.name!.fr!.localizedCaseInsensitiveContains(searchText) }
+  }
+  
+  func sortPokemonsByType(type: String) -> [Pokemon] {
+    return pokemons.filter { $0.types[0].name!.localizedCaseInsensitiveContains(type)}
+  }
+  
+  func getEvolutions(for pokemon: Pokemon) -> [Pokemon] {
+    guard let evolution = pokemon.evolution else {
+      return []
+    }
+    
+    let preEvolutionIDs = evolution.pre?.compactMap { $0.pokedexID } ?? []
+    let nextEvolutionIDs = evolution.next?.compactMap { $0.pokedexID } ?? []
+    
+    let evolutionIDs = preEvolutionIDs + nextEvolutionIDs
+
+    return self.pokemons.filter { evolutionIDs.contains($0.pokedexID ?? -1) }
   }
 }
