@@ -10,18 +10,20 @@ import TyradexKit
 
 struct FavoritesPokemonsView: View {
   
-  var favoritePokemon_vm: FavoritePokemonViewModel
+  @Environment(\.dismiss) private var dismiss
+  
+  var pokemon_vm: PokemonViewModel
   
   var body: some View {
     NavigationStack{
       VStack{
-        if favoritePokemon_vm.favoritesPokemons.isEmpty {
+        if pokemon_vm.favoritesPokemons.isEmpty {
           Text("Aucun pokémon favoris pour le moments.")
         } else {
           ScrollView{
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
-              ForEach(favoritePokemon_vm.favoritesPokemons){ pokemon in
-                NavigationLink(destination: PokemonView(favoritePokemon_vm: favoritePokemon_vm, pokemon: pokemon)) {
+              ForEach(pokemon_vm.favoritesPokemons){ pokemon in
+                NavigationLink(destination: PokemonView(pokemon_vm: pokemon_vm, pokemon: pokemon)) {
                   VStack{
                     ImageLoader(image: pokemon.sprites!.regular)
                       .aspectRatio(contentMode: .fit)
@@ -33,7 +35,7 @@ struct FavoritesPokemonsView: View {
                   .padding()
                   .bold()
                   .frame(width: 175, height: 175)
-                  .background(pokemon.getColorFromType(type: pokemon.types[0].name!).gradient)
+                  .background(pokemon.getColorFromType().gradient)
                   .clipShape(.rect(cornerRadius: 10))
                 }
               }
@@ -41,6 +43,24 @@ struct FavoritesPokemonsView: View {
           }
         }
       }
+      .navigationBarBackButtonHidden(true)
+      .toolbar{
+        ToolbarItem(placement: .topBarLeading) {
+          Button(action: { dismiss() }) {
+            Image(systemName: "chevron.left")
+              .tint(.white)
+              .bold()
+          }
+        }
+        ToolbarItem(placement: .principal) {
+          Text("Favoris")
+            .foregroundStyle(.white)
+            .font(.title3)
+            .bold()
+        }
+      }
+      .toolbarBackground(.red, for: .navigationBar)
+      .toolbarBackground(.visible, for: .navigationBar)
       .padding()
       .toolbarBackground(.red, for: .navigationBar)
     }
