@@ -10,8 +10,8 @@ import SwiftUI
 import TyradexKit
 
 extension Pokemon {
-  func getColorFromType() -> Color {
-    switch self.types[0].name! {
+  func getColorFromType(type: String) -> Color {
+    switch type {
       case "Normal", "Vol": return .orange
       case "Plante", "Insecte": return .green
       case "Feu", "Dragon": return .red
