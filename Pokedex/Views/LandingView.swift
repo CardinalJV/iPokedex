@@ -20,36 +20,38 @@ struct LandingView: View {
       VStack{
         HStack{
           TextField("Rechercher un pokémon", text: $searchText)
-          Button(action: { self.searchText.removeAll() }, label: {
-            Image(systemName: "multiply.circle.fill")
-              .tint(.gray)
-          })
+          if !searchText.isEmpty {
+            Button(action: { self.searchText.removeAll() }, label: {
+              Image(systemName: "multiply.circle.fill")
+                .tint(.gray)
+            })
+          }
         }
         .frame(height: 10)
         .padding()
         .background(Color(.systemGray6))
         .cornerRadius(10)
-          ScrollView{
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
-              ForEach(searchText.isEmpty ? pokemon_vm.pokemons : pokemon_vm.sortPokemons(searchText: self.searchText)){ pokemon in
-                NavigationLink(destination: PokemonView(pokemon_vm: self.pokemon_vm, pokemon: pokemon)) {
-                  VStack{
-                    ImageLoader(image: pokemon.sprites!.regular)
-                      .aspectRatio(contentMode: .fit)
-                      .shadow(color: .black, radius: 10, x: 0, y: 0)
-                    Text(pokemon.name!.fr!)
-                    Text("#\(pokemon.pokedexID!)")
-                  }
-                  .foregroundStyle(.black)
-                  .padding()
-                  .bold()
-                  .frame(width: 175, height: 175)
-                  .background(pokemon.getColorFromType().gradient)
-                  .clipShape(.rect(cornerRadius: 10))
+        ScrollView{
+          LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
+            ForEach(searchText.isEmpty ? pokemon_vm.pokemons : pokemon_vm.sortPokemons(searchText: self.searchText)){ pokemon in
+              NavigationLink(destination: PokemonView(pokemon_vm: self.pokemon_vm, pokemon: pokemon)) {
+                VStack{
+                  ImageLoader(image: pokemon.sprites!.regular)
+                    .aspectRatio(contentMode: .fit)
+                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                  Text(pokemon.name!.fr!)
+                  Text("#\(pokemon.pokedexID!)")
                 }
+                .foregroundStyle(.black)
+                .padding()
+                .bold()
+                .frame(width: 175, height: 175)
+                .background(pokemon.getColorFromType(type: pokemon.types[0].name!).gradient)
+                .clipShape(.rect(cornerRadius: 10))
               }
             }
           }
+        }
       }
       .padding()
       .ignoresSafeArea(edges: .bottom)
