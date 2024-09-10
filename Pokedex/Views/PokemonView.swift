@@ -25,16 +25,29 @@ struct PokemonView: View {
           /* Header */
           ZStack{
             Circle()
-              .fill(pokemon.getColorFromType())
-              .shadow(color: pokemon.getColorFromType().opacity(1), radius: 10, x: 0, y: 0)
+              .fill(pokemon.getColorFromType(type: pokemon.types[0].name!))
+              .shadow(color: pokemon.getColorFromType(type: pokemon.types[0].name!).opacity(1), radius: 10, x: 0, y: 0)
               .blur(radius: 10)
-            VStack{
-              ImageLoader(image: pokemon.sprites!.regular)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 250)
-              Text(pokemon.name!.fr!)
-                .font(.title3)
-                .bold()
+            VStack(spacing: 5){
+              TabView {
+                  VStack{
+                    ImageLoader(image: pokemon.sprites!.regular)
+                      .aspectRatio(contentMode: .fit)
+                      .frame(width: 250)
+                    Text(pokemon.name!.fr!)
+                      .font(.title3)
+                      .bold()
+                  }
+                  VStack{
+                    ImageLoader(image: pokemon.sprites!.shiny)
+                      .aspectRatio(contentMode: .fit)
+                      .frame(width: 250)
+                    Text("\(pokemon.name!.fr!) (Shiny)")
+                      .font(.title3)
+                      .bold()
+                  }
+              }
+              .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
               Text("#\(pokemon.pokedexID!)")
             }
           }
@@ -48,7 +61,7 @@ struct PokemonView: View {
               ForEach(pokemon.types) { type in
                 Text(type.name!)
                   .padding(6)
-                  .background(pokemon.getColorFromType())
+                  .background(pokemon.getColorFromType(type: type.name!))
                   .bold()
                   .clipShape(.rect(cornerRadius: 5))
               }
@@ -90,11 +103,11 @@ struct PokemonView: View {
               Text("Statistiques")
                 .bold()
               VStack{
-                StatsItem(name: "HP", color: pokemon.getColorFromType(), score: pokemon.stats!.hp!)
-                StatsItem(name: "Attaque", color: pokemon.getColorFromType(), score: pokemon.stats!.atk!)
-                StatsItem(name: "Défense", color: pokemon.getColorFromType(), score: pokemon.stats!.def!)
-                StatsItem(name: "Spé.Attaque", color: pokemon.getColorFromType(), score: pokemon.stats!.spe_atk!)
-                StatsItem(name: "Spé.Défense", color: pokemon.getColorFromType(), score: pokemon.stats!.spe_def!)
+                StatsItem(name: "HP", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.hp!)
+                StatsItem(name: "Attaque", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.atk!)
+                StatsItem(name: "Défense", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.def!)
+                StatsItem(name: "Spé.Attaque", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.spe_atk!)
+                StatsItem(name: "Spé.Défense", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.spe_def!)
               }
             }
             .opacity(showAnimation ? 1 : 0)
@@ -118,8 +131,11 @@ struct PokemonView: View {
                     .padding()
                     .bold()
                     .frame(width: 175, height: 175)
-                    .background(pokemon.getColorFromType().gradient)
+                    .background(pokemon.getColorFromType(type: pokemon.types[0].name!).gradient)
                     .clipShape(.rect(cornerRadius: 10))
+                  }
+                  if pokemon_vm.getEvolutions(for: self.pokemon).count == 1 {
+                    Spacer()
                   }
                 }
                 .padding()
@@ -141,9 +157,9 @@ struct PokemonView: View {
             }) {
               HStack {
                 Image(systemName: "chevron.left")
-                  .foregroundColor(pokemon.getColorFromType())
+                  .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
                 Text("Retour")
-                  .foregroundColor(pokemon.getColorFromType())
+                  .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
               }
               .bold()
             }
@@ -157,7 +173,7 @@ struct PokemonView: View {
                       "heart"
               )
               .font(.title3)
-              .foregroundStyle(pokemon.getColorFromType())
+              .foregroundStyle(pokemon.getColorFromType(type: pokemon.types[0].name!))
               .bold()
             })
           }
