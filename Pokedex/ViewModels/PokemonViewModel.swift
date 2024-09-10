@@ -1,9 +1,9 @@
-//
-//  FavoritePokemonViewModel.swift
-//  Pokedex
-//
-//  Created by Jessy Viranaiken on 07/09/2024.
-//
+  //
+  //  FavoritePokemonViewModel.swift
+  //  Pokedex
+  //
+  //  Created by Jessy Viranaiken on 07/09/2024.
+  //
 
 import Foundation
 import TyradexKit
@@ -28,7 +28,11 @@ class PokemonViewModel {
   }
   
   func sortPokemons(searchText: String) -> [Pokemon] {
-    return pokemons.filter { $0.name!.fr!.localizedCaseInsensitiveContains(searchText) }
+    if let index = Int(searchText) {
+      return pokemons.filter { $0.pokedexID! == index }
+    } else {
+      return pokemons.filter { $0.name!.fr!.localizedCaseInsensitiveContains(searchText) }
+    }
   }
   
   func sortPokemonsByType(type: String) -> [Pokemon] {
@@ -44,7 +48,7 @@ class PokemonViewModel {
     let nextEvolutionIDs = evolution.next?.compactMap { $0.pokedexID } ?? []
     
     let evolutionIDs = preEvolutionIDs + nextEvolutionIDs
-
+    
     return self.pokemons.filter { evolutionIDs.contains($0.pokedexID ?? -1) }
   }
 }
