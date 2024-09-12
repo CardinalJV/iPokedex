@@ -15,7 +15,7 @@ struct PokemonView: View {
   var pokemon_vm: PokemonViewModel
   let pokemon: Pokemon
   
-  @State private var showAlert = false
+  @State var showToast = false
   @State private var showAnimation = false
   
   var body: some View {
@@ -30,22 +30,22 @@ struct PokemonView: View {
               .blur(radius: 10)
             VStack(spacing: 5){
               TabView {
-                  VStack{
-                    ImageLoader(image: pokemon.sprites!.regular)
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 250)
-                    Text(pokemon.name!.fr!)
-                      .font(.title3)
-                      .bold()
-                  }
-                  VStack{
-                    ImageLoader(image: pokemon.sprites!.shiny)
-                      .aspectRatio(contentMode: .fit)
-                      .frame(width: 250)
-                    Text("\(pokemon.name!.fr!) (Shiny)")
-                      .font(.title3)
-                      .bold()
-                  }
+                VStack{
+                  ImageLoader(image: pokemon.sprites!.regular)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 250)
+                  Text(pokemon.name!.fr!)
+                    .font(.title3)
+                    .bold()
+                }
+                VStack{
+                  ImageLoader(image: pokemon.sprites!.shiny)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 250)
+                  Text("\(pokemon.name!.fr!) (Shiny)")
+                    .font(.title3)
+                    .bold()
+                }
               }
               .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
               Text("#\(pokemon.pokedexID!)")
@@ -143,8 +143,8 @@ struct PokemonView: View {
               .opacity(showAnimation ? 1 : 0)
               .animation(.easeInOut(duration: 0.4).delay(0.4), value: showAnimation)
             }
+            /* - */
           }
-          /* - */
         }
         .onAppear{
           showAnimation = true
@@ -165,37 +165,15 @@ struct PokemonView: View {
             }
           }
           ToolbarItem(placement: .topBarTrailing) {
-            Button(action: {
-              showAlert.toggle()
-            }, label: {
-              Image(systemName: pokemon_vm.isInFavorites(pokemon: self.pokemon) ?
-                    "heart.fill" :
-                      "heart"
-              )
-              .font(.title3)
-              .foregroundStyle(pokemon.getColorFromType(type: pokemon.types[0].name!))
-              .bold()
-            })
+            FavoriteButton(pokemon_vm: self.pokemon_vm, pokemon: self.pokemon)
           }
-        }
-        .alert("Favoris", isPresented: $showAlert) {
-          Button(action: { showAlert.toggle() }, label: {
-            Text("Annuler")
-          })
-          Button(action: {
-            Task {
-              pokemon_vm.isInFavorites(pokemon: self.pokemon) ?
-              await pokemon_vm.deleteInFav(pokemon: self.pokemon) :
-              await pokemon_vm.addInFav(pokemon: self.pokemon)
-            }
-          }, label: {
-            Text(pokemon_vm.isInFavorites(pokemon: self.pokemon) ? "Supprimer" : "Ajouter")
-              .bold()
-          })
-        } message: {
-          Text(pokemon_vm.isInFavorites(pokemon: self.pokemon) ? "Voulez-vous supprimer ce pokémon de vos favoris ?" : "Voulez-vous ajouter ce pokémon dans vos favoris ?")
         }
       }
     }
   }
 }
+
+
+  //#Preview {
+  //  LandingView()
+  //}
