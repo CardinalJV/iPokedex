@@ -11,7 +11,7 @@ struct StatsItem: View {
   
   let name: String
   let color: Color
-  @State var score: Int
+  let score: Int
   let maxScore = 100
   
     var body: some View {
@@ -21,7 +21,7 @@ struct StatsItem: View {
         Spacer()
         Text("\(score)")
         Spacer()
-        ProgressView(value: Double(score)/Double(maxScore))
+        ProgressView(value: Double(score) / Double(maxScore))
           .progressViewStyle(LinearProgressViewStyle())
           .tint(color)
           .frame(width: 100)
