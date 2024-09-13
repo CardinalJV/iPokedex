@@ -35,7 +35,7 @@ struct FavoritesPokemonsView: View {
                   .padding()
                   .bold()
                   .frame(width: 175, height: 175)
-                  .background(pokemon.getColorFromType(type: pokemon.types[0].name!).gradient)
+                  .background(pokemon_vm.getColorFromType(pokemon.types[0].name!).gradient)
                   .clipShape(.rect(cornerRadius: 10))
                 }
               }
