@@ -10,7 +10,7 @@ import TyradexKit
 
 struct PokemonView: View {
   
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) private var dismiss
   
   var pokemon_vm: PokemonViewModel
   let pokemon: Pokemon
@@ -25,9 +25,11 @@ struct PokemonView: View {
           /* Header */
           ZStack{
             Circle()
-              .fill(pokemon.getColorFromType(type: pokemon.types[0].name!))
-              .shadow(color: pokemon.getColorFromType(type: pokemon.types[0].name!).opacity(1), radius: 10, x: 0, y: 0)
+              .fill(pokemon_vm.getColorFromType(pokemon.types[0].name!))
+              .shadow(color: pokemon_vm.getColorFromType(pokemon.types[0].name!).opacity(1), radius: 10, x: 0, y: 0)
               .blur(radius: 10)
+              .scaleEffect(self.showAnimation ? 1 : 0)
+              .animation(.smooth(duration: 0.3).delay(0.2), value: self.showAnimation)
             VStack(spacing: 5){
               TabView {
                 VStack{
@@ -52,8 +54,8 @@ struct PokemonView: View {
             }
           }
           .frame(height: 300)
-          .opacity(showAnimation ? 1 : 0)
-          .animation(.easeInOut(duration: 0.4), value: showAnimation)
+          .scaleEffect(self.showAnimation ? 1 : 0)
+          .animation(.bouncy(duration: 0.3).delay(0.2), value: showAnimation)
           /* - */
           VStack(spacing: 10){
             /* Composant types */
@@ -61,14 +63,14 @@ struct PokemonView: View {
               ForEach(pokemon.types) { type in
                 Text(type.name!)
                   .padding(6)
-                  .background(pokemon.getColorFromType(type: type.name!))
+                  .background(pokemon_vm.getColorFromType(type.name!))
                   .bold()
                   .clipShape(.rect(cornerRadius: 5))
               }
             }
             .padding()
             .opacity(showAnimation ? 1 : 0)
-            .animation(.easeInOut(duration: 0.4).delay(0.1), value: showAnimation)
+            .animation(.bouncy(duration: 0.4).delay(0.4), value: showAnimation)
             /* - */
             /* Composant a propos */
             VStack{
@@ -96,22 +98,22 @@ struct PokemonView: View {
               .clipShape(.rect(cornerRadius: 10))
             }
             .opacity(showAnimation ? 1 : 0)
-            .animation(.easeInOut(duration: 0.4).delay(0.2), value: showAnimation)
+            .animation(.bouncy(duration: 0.4).delay(0.4), value: showAnimation)
             /* - */
             /* Composant statistiques */
             VStack{
               Text("Statistiques")
                 .bold()
               VStack{
-                StatsItem(name: "HP", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.hp!)
-                StatsItem(name: "Attaque", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.atk!)
-                StatsItem(name: "Défense", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.def!)
-                StatsItem(name: "Spé.Attaque", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.spe_atk!)
-                StatsItem(name: "Spé.Défense", color: pokemon.getColorFromType(type: pokemon.types[0].name!), score: pokemon.stats!.spe_def!)
+                StatsItem(name: "HP", color: pokemon_vm.getColorFromType(pokemon.types[0].name!), score: pokemon.stats!.hp!)
+                StatsItem(name: "Attaque", color: pokemon_vm.getColorFromType(pokemon.types[0].name!), score: pokemon.stats!.atk!)
+                StatsItem(name: "Défense", color: pokemon_vm.getColorFromType(pokemon.types[0].name!), score: pokemon.stats!.def!)
+                StatsItem(name: "Spé.Attaque", color: pokemon_vm.getColorFromType(pokemon.types[0].name!), score: pokemon.stats!.spe_atk!)
+                StatsItem(name: "Spé.Défense", color: pokemon_vm.getColorFromType(pokemon.types[0].name!), score: pokemon.stats!.spe_def!)
               }
             }
             .opacity(showAnimation ? 1 : 0)
-            .animation(.easeInOut(duration: 0.4).delay(0.3), value: showAnimation)
+            .animation(.bouncy(duration: 0.4).delay(0.5), value: showAnimation)
             /* - */
             /* Composant évolutions */
             if !pokemon_vm.getEvolutions(for: pokemon).isEmpty {
@@ -131,7 +133,7 @@ struct PokemonView: View {
                     .padding()
                     .bold()
                     .frame(width: 175, height: 175)
-                    .background(pokemon.getColorFromType(type: pokemon.types[0].name!).gradient)
+                    .background(pokemon_vm.getColorFromType(pokemon.types[0].name!).gradient)
                     .clipShape(.rect(cornerRadius: 10))
                   }
                   if pokemon_vm.getEvolutions(for: self.pokemon).count == 1 {
@@ -141,7 +143,7 @@ struct PokemonView: View {
                 .padding()
               }
               .opacity(showAnimation ? 1 : 0)
-              .animation(.easeInOut(duration: 0.4).delay(0.4), value: showAnimation)
+              .animation(.bouncy(duration: 0.4).delay(0.6), value: showAnimation)
             }
             /* - */
           }
@@ -153,13 +155,13 @@ struct PokemonView: View {
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
             Button(action: {
-              presentationMode.wrappedValue.dismiss()
+              dismiss()
             }) {
               HStack {
                 Image(systemName: "chevron.left")
-                  .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
+                  .foregroundColor(pokemon_vm.getColorFromType(pokemon.types[0].name!))
                 Text("Retour")
-                  .foregroundColor(pokemon.getColorFromType(type: pokemon.types[0].name!))
+                  .foregroundColor(pokemon_vm.getColorFromType(pokemon.types[0].name!))
               }
               .bold()
             }
@@ -173,7 +175,6 @@ struct PokemonView: View {
   }
 }
 
-
-  //#Preview {
-  //  LandingView()
-  //}
+#Preview {
+  LandingView()
+}
