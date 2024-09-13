@@ -7,6 +7,7 @@
 
 import Foundation
 import TyradexKit
+import SwiftUI
 
 @Observable
 class PokemonViewModel {
@@ -15,15 +16,30 @@ class PokemonViewModel {
   
   var favoritesPokemons = [Pokemon]()
   
-  func addInFav(pokemon: Pokemon) async {
+  func getColorFromType(_ type: String) -> Color {
+    switch type {
+      case "Normal", "Vol": return .orange
+      case "Plante", "Insecte": return .green
+      case "Feu", "Dragon": return .red
+      case "Eau", "Glace": return .blue
+      case "Combat", "Acier": return .gray
+      case "Poison", "Ténèbres": return .purple
+      case "Fée", "Spectre": return .pink
+      case "Sol", "Roche": return .brown
+      case "Électrik", "Psy": return .yellow
+      default: return .white
+    }
+  }
+  
+  func addInFav(_ pokemon: Pokemon) async {
     return favoritesPokemons.append(pokemon)
   }
   
-  func deleteInFav(pokemon: Pokemon) async {
+  func deleteInFav(_ pokemon: Pokemon) async {
     return favoritesPokemons.removeAll(where: { $0.id == pokemon.id })
   }
   
-  func isInFavorites(pokemon: Pokemon) -> Bool {
+  func isInFavorites(_ pokemon: Pokemon) -> Bool {
     return favoritesPokemons.contains(where: { $0.id == pokemon.id })
   }
   
@@ -35,8 +51,12 @@ class PokemonViewModel {
     }
   }
   
-  func sortPokemonsByType(type: String) -> [Pokemon] {
-    return pokemons.filter { $0.types[0].name!.localizedCaseInsensitiveContains(type)}
+  func sortPokemonsByType(_ type: String) -> [Pokemon] {
+    if type == "Aucun" {
+      return self.pokemons
+    } else {
+      return pokemons.filter { $0.types[0].name!.localizedCaseInsensitiveContains(type)}
+    }
   }
   
   func getEvolutions(for pokemon: Pokemon) -> [Pokemon] {
