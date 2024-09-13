@@ -16,23 +16,23 @@ struct FavoriteButton: View {
   func image(_ image: Image, show: Bool) -> some View {
     image
       .scaleEffect(show ? 1 : 0)
-      .tint(self.pokemon.getColorFromType(type: pokemon.types[0].name!))
+      .tint(self.pokemon_vm.getColorFromType(pokemon.types[0].name!))
       .bold()
       .font(.title3)
-      .animation(.easeInOut(duration: 0.3), value: show)
+      .animation(.bouncy(duration: 0.5), value: show)
   }
   
   var body: some View {
     Button(action: {
       Task {
-        pokemon_vm.isInFavorites(pokemon: self.pokemon) ?
-        await pokemon_vm.deleteInFav(pokemon: self.pokemon) :
-        await pokemon_vm.addInFav(pokemon: self.pokemon)
+        pokemon_vm.isInFavorites(self.pokemon) ?
+        await pokemon_vm.deleteInFav(self.pokemon) :
+        await pokemon_vm.addInFav(self.pokemon)
       }
     }, label: {
       ZStack{
-          image(Image(systemName: "heart.fill"), show: pokemon_vm.isInFavorites(pokemon: pokemon))
-          image(Image(systemName: "heart"), show: !pokemon_vm.isInFavorites(pokemon: pokemon))
+        image(Image(systemName: "heart.fill"), show: pokemon_vm.isInFavorites(pokemon))
+        image(Image(systemName: "heart"), show: !pokemon_vm.isInFavorites(pokemon))
       }
     })
   }
