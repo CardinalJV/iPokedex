@@ -1,2 +1,2 @@
 # Pokedex
-Un pokedex en SwiftUI.
+Un pokédex en SwiftUI.
