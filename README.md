@@ -6,7 +6,7 @@
 
 # Pokedex
 
-Pokedex est une application iOS native qui permet aux utilisateurs de consulter et d'explorer des données sur les Pokémon. L'application suit l'architecture MVVM (Model-View-ViewModel) et utilise des requêtes asynchrones pour récupérer les informations depuis une API externe. L'interface est conçue avec SwiftUI, offrant une expérience utilisateur fluide et réactive.
+Pokedex est une application iOS native qui permet aux utilisateurs de consulter et d'explorer des données sur les Pokémon. L'application suit l'architecture MVVM (Model-View-ViewModel) et récupère les données depuis un package externe. L'interface est conçue avec SwiftUI, offrant une expérience utilisateur fluide et réactive avec des animations améliorant l'expérience utilisateur.
 
 ## Fonctionnamités principales
 
