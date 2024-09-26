@@ -26,8 +26,8 @@ struct FavoriteButton: View {
     Button(action: {
       Task {
         pokemon_vm.isInFavorites(self.pokemon) ?
-        await pokemon_vm.deleteInFav(self.pokemon) :
-        await pokemon_vm.addInFav(self.pokemon)
+        pokemon_vm.deleteInFav(self.pokemon) :
+        pokemon_vm.addInFav(self.pokemon)
       }
     }, label: {
       ZStack{
