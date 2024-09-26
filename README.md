@@ -40,11 +40,11 @@ Les composants réutilisables, comme les cartes de Pokémon, permettent une navi
 
 ## Détails techniques
 
-Langage : Swift
-Frameworks : SwiftUI
-Architecture : MVVM (Model-View-ViewModel)
-Récupération de données : Utilisation d'un package externe(Crédits: https://tyradex.vercel.app)
-Version iOS supportée : iOS 14 et plus
+- Langage : Swift
+- Frameworks : SwiftUI
+- Architecture : MVVM (Model-View-ViewModel)
+- Récupération de données : Utilisation d'un package externe(Crédits: https://tyradex.vercel.app)
+- Version iOS supportée : iOS 14 et plus
 
 ## Installation
 
