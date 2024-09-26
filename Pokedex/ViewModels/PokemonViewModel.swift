@@ -30,11 +30,11 @@ class PokemonViewModel {
     }
   }
   
-  func addInFav(_ pokemon: Pokemon) async {
+  func addInFav(_ pokemon: Pokemon) {
     return favoritesPokemons.append(pokemon)
   }
   
-  func deleteInFav(_ pokemon: Pokemon) async {
+  func deleteInFav(_ pokemon: Pokemon) {
     return favoritesPokemons.removeAll(where: { $0.id == pokemon.id })
   }
   
