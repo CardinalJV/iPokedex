@@ -33,9 +33,11 @@ struct PokemonView: View {
             VStack(spacing: 5){
               TabView {
                 VStack{
-                  ImageLoader(image: pokemon.sprites!.regular)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 250)
+                  HStack{
+                    ImageLoader(image: pokemon.sprites!.regular)
+                      .aspectRatio(contentMode: .fit)
+                      .frame(width: 250)
+                  }
                   Text(pokemon.name!.fr!)
                     .font(.title3)
                     .bold()
