@@ -12,7 +12,6 @@ struct LandingView: View {
   
   @StateObject private var pokemonRepo: PokemonRepository = .shared
   @State var pokemon_vm = PokemonViewModel()
-  @Namespace private var namespace
   
   private let pokemonTypes = [ "Aucun", "Normal", "Vol", "Plante", "Insecte", "Feu", "Dragon", "Eau", "Glace", "Combat", "Acier", "Poison", "Ténèbres", "Fée", "Spectre", "Sol", "Roche", "Électrik", "Psy" ]
   @State private var selectedType = "Aucun"
