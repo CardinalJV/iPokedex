@@ -1,5 +1,5 @@
   //
-  //  FavoritePokemonViewModel.swift
+  //  PokemonViewModel.swift
   //  Pokedex
   //
   //  Created by Jessy Viranaiken on 07/09/2024.
@@ -41,20 +41,21 @@ class PokemonViewModel {
   func isInFavorites(_ pokemon: Pokemon) -> Bool {
     return favoritesPokemons.contains(where: { $0.id == pokemon.id })
   }
-  
-  func sortPokemons(searchText: String) -> [Pokemon] {
+
+  func sortPokemons(searchText: String, type: String) -> [Pokemon] {
+    let filteredBySearchText: [Pokemon]
     if let index = Int(searchText) {
-      return pokemons.filter { $0.pokedexID! == index }
+      filteredBySearchText = pokemons.filter { $0.pokedexID! == index }
+    } else if !searchText.isEmpty {
+      filteredBySearchText = pokemons.filter { $0.name!.fr!.localizedCaseInsensitiveContains(searchText) }
     } else {
-      return pokemons.filter { $0.name!.fr!.localizedCaseInsensitiveContains(searchText) }
+      filteredBySearchText = pokemons
     }
-  }
-  
-  func sortPokemonsByType(_ type: String) -> [Pokemon] {
+    
     if type == "Aucun" {
-      return self.pokemons
+      return filteredBySearchText
     } else {
-      return pokemons.filter { $0.types[0].name!.localizedCaseInsensitiveContains(type)}
+      return filteredBySearchText.filter { $0.types[0].name!.localizedCaseInsensitiveContains(type) }
     }
   }
   
