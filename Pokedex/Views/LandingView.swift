@@ -60,7 +60,7 @@ struct LandingView: View {
         /* Grille de pokémons */
         ScrollView{
           LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
-            ForEach(searchText.isEmpty ? pokemon_vm.sortPokemonsByType(selectedType) : pokemon_vm.sortPokemons(searchText: self.searchText)){ pokemon in
+            ForEach(pokemon_vm.sortPokemons(searchText: self.searchText, type: self.selectedType)){ pokemon in
               NavigationLink(destination: PokemonView(pokemon_vm: self.pokemon_vm, pokemon: pokemon)) {
                 VStack{
                   ImageLoader(image: pokemon.sprites!.regular)
