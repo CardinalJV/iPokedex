@@ -52,4 +52,4 @@ Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vo
 
 ## ScreenShots
 
-<video src="file:///Users/jessyviranaiken/Library/Mobile%20Documents/com~apple~CloudDocs/ScreenCast-iPokedex.mp4" controls>
+<video src="https://github.com/CardinalJV/iPokedex/issues/1#issue-2576451646" controls>
