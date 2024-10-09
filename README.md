@@ -52,4 +52,4 @@ Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vo
 
 ## ScreenShots
 
-<video src="https://github.com/CardinalJV/iPokedex/issues/1#issue-2576451646" controls>
+https://github.com/CardinalJV/iPokedex/issues/1#issue-2576451646
