@@ -44,6 +44,7 @@ struct FavoritesPokemonsView: View {
         }
       }
       .navigationBarBackButtonHidden(true)
+      .navigationBarTitleDisplayMode(.inline)
       .toolbar{
         ToolbarItem(placement: .topBarLeading) {
           Button(action: { dismiss() }) {
@@ -62,7 +63,6 @@ struct FavoritesPokemonsView: View {
       .toolbarBackground(.red, for: .navigationBar)
       .toolbarBackground(.visible, for: .navigationBar)
       .padding()
-      .toolbarBackground(.red, for: .navigationBar)
     }
   }
 }
