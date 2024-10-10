@@ -50,6 +50,6 @@ Les composants réutilisables, comme les cartes de Pokémon, permettent une navi
 
 Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vous que vous utilisez la dernière version de Xcode compatible avec Swift 5 et SwiftUI pour éviter tout problème de compatibilité.
 
-## ScreenShots
+## ScreenCast
 
 https://github.com/user-attachments/assets/1a2a1d36-c31c-400e-9fdb-0354abed53da
