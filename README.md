@@ -52,4 +52,4 @@ Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vo
 
 ## ScreenShots
 
-https://github.com/user-attachments/assets/7f33d3b2-770a-446c-afbe-143ba690806e
+https://github.com/user-attachments/assets/1a2a1d36-c31c-400e-9fdb-0354abed53da
