@@ -24,7 +24,6 @@ Les données des Pokémon sont récupérées et traitées via le PokemonViewMode
 - Gestion des favoris :
   
 Les utilisateurs peuvent marquer leurs Pokémon préférés et les consulter dans la vue FavoritesPokemonsView.swift.
-Les favoris sont stockés localement, et la gestion est optimisée pour une récupération rapide des données.
 
 - Architecture MVVM :
   
