@@ -28,7 +28,7 @@ Les utilisateurs peuvent marquer leurs Pokémon préférés et les consulter dan
 - Architecture MVVM :
   
 Le projet est structuré selon l'architecture MVVM pour une séparation claire entre la logique d'affichage (Vue) et la gestion des données (Modèle et ViewModel).
-Modèles : Les modèles sont définis dans PokemonData.swift, où les données des Pokémon sont modélisées.
+Modèles : Le model est récupéré depuis un package externe, où les données des Pokémon sont modélisées.
 ViewModels : La logique métier et la récupération des données sont centralisées dans PokemonViewModel.swift.
 
 - Interface SwiftUI :
