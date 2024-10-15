@@ -8,6 +8,10 @@
 
 Pokedex est une application iOS native qui permet aux utilisateurs de consulter et d'explorer des données sur les Pokémon. L'application suit l'architecture MVVM (Model-View-ViewModel) et récupère les données depuis un package externe. L'interface est conçue avec SwiftUI, offrant une expérience utilisateur fluide et réactive avec des animations améliorant l'expérience utilisateur.
 
+## ScreenCast
+
+https://github.com/user-attachments/assets/1a2a1d36-c31c-400e-9fdb-0354abed53da
+
 ## Fonctionnalités principales
 
 - Affichage des Pokémon :
@@ -48,7 +52,3 @@ Les composants réutilisables, comme les cartes de Pokémon, permettent une navi
 ## Installation
 
 Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vous que vous utilisez la dernière version de Xcode compatible avec Swift 5 et SwiftUI pour éviter tout problème de compatibilité.
-
-## ScreenCast
-
-https://github.com/user-attachments/assets/1a2a1d36-c31c-400e-9fdb-0354abed53da
