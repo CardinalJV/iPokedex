@@ -2,8 +2,6 @@
   <img src="https://raw.githubusercontent.com/CardinalJV/CardinalJV/main/assets/logo-swift/swiftui-96x96_2x.png" alt="SwiftUI" title="SwiftUI" width="75" height="75"/>
 </a>
 
-----
-
 # Pokedex
 
 Pokedex est une application iOS native qui permet aux utilisateurs de consulter et d'explorer des données sur les Pokémon. L'application suit l'architecture MVVM (Model-View-ViewModel) et récupère les données depuis un package externe. L'interface est conçue avec SwiftUI, offrant une expérience utilisateur fluide et réactive avec des animations améliorant l'expérience utilisateur.
