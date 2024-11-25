@@ -102,6 +102,9 @@ struct PokemonView: View {
             .opacity(showAnimation ? 1 : 0)
             .animation(.bouncy(duration: 0.4).delay(0.4), value: showAnimation)
             /* - */
+            RoundedRectangle(cornerRadius: 10)
+              .frame(width: 350, height: 5)
+              .foregroundStyle(self.pokemon_vm.getColorFromType(self.pokemon.types[0].name!))
             /* Composant statistiques */
             VStack{
               Text("Statistiques")
@@ -117,6 +120,9 @@ struct PokemonView: View {
             .opacity(showAnimation ? 1 : 0)
             .animation(.bouncy(duration: 0.4).delay(0.5), value: showAnimation)
             /* - */
+            RoundedRectangle(cornerRadius: 10)
+              .frame(width: 350, height: 5)
+              .foregroundStyle(self.pokemon_vm.getColorFromType(self.pokemon.types[0].name!))
             /* Composant évolutions */
             if !pokemon_vm.getEvolutions(for: pokemon).isEmpty {
               VStack(spacing: 0){

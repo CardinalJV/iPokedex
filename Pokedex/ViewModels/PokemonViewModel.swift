@@ -7,13 +7,19 @@
 
 import TyradexKit
 import SwiftUI
+import SwiftData
 
 @Observable
 class PokemonViewModel {
   
+  var context: ModelContext? = nil
+  
   var pokemons = [Pokemon]()
   
   var favoritesPokemons = [Pokemon]()
+  var favoritesIsLoading = true
+  
+  @ObservationIgnored private var pokemonDatas = [PokemonData]()
   
   func getColorFromType(_ type: String) -> Color {
     switch type {
@@ -30,18 +36,61 @@ class PokemonViewModel {
     }
   }
   
+  func fetchPokemonData() {
+    guard let context = self.context else {
+      print("Context error")
+      return
+    }
+    do {
+        // Fetching data
+      let descriptor = FetchDescriptor<PokemonData>()
+      self.pokemonDatas = try context.fetch(descriptor)
+        // Convert data to Pokemon
+      for pokemon in self.pokemons where self.pokemonDatas.contains(where: { $0.id == pokemon.pokedexID! }) {
+        self.favoritesPokemons.append(pokemon)
+      }
+      self.favoritesIsLoading = false
+    } catch {
+      print("Error during fetching data in local storage: \(error.localizedDescription)")
+    }
+  }
+  
   func addInFav(_ pokemon: Pokemon) {
-    return favoritesPokemons.append(pokemon)
+    guard let context = self.context, let pokedexID = pokemon.pokedexID else {
+      print("Context or pokemon has a error")
+      return
+    }
+    self.favoritesPokemons.append(pokemon)
+    do {
+      context.insert(PokemonData(id: pokedexID))
+      try context.save()
+    } catch {
+      print("Error during adding in local storage: \(error.localizedDescription)")
+    }
   }
   
   func deleteInFav(_ pokemon: Pokemon) {
-    return favoritesPokemons.removeAll(where: { $0.id == pokemon.id })
+    guard let context = self.context, let pokedexID = pokemon.pokedexID else {
+      print("Context or pokemon has a error")
+      return
+    }
+    self.favoritesPokemons.removeAll(where: { $0.id == pokemon.id })
+    do {
+      for pokemonData in pokemonDatas {
+        if pokemonData.id == pokedexID {
+          context.delete(pokemonData)
+          try context.save()
+        }
+      }
+    } catch {
+      print("Error during deleting in local storage: \(error.localizedDescription)")
+    }
   }
   
   func isInFavorites(_ pokemon: Pokemon) -> Bool {
     return favoritesPokemons.contains(where: { $0.id == pokemon.id })
   }
-
+  
   func sortPokemons(searchText: String, type: String) -> [Pokemon] {
     let filteredBySearchText: [Pokemon]
     if let index = Int(searchText) {

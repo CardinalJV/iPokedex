@@ -24,11 +24,9 @@ struct FavoriteButton: View {
   
   var body: some View {
     Button(action: {
-      Task {
         pokemon_vm.isInFavorites(self.pokemon) ?
         pokemon_vm.deleteInFav(self.pokemon) :
         pokemon_vm.addInFav(self.pokemon)
-      }
     }, label: {
       ZStack{
         image(Image(systemName: "heart.fill"), show: pokemon_vm.isInFavorites(pokemon))

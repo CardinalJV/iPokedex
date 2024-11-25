@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct PokedexApp: App {
@@ -13,5 +14,6 @@ struct PokedexApp: App {
         WindowGroup {
             LandingView()
         }
+        .modelContainer(for: PokemonData.self)
     }
 }

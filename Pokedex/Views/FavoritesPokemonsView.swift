@@ -12,13 +12,15 @@ struct FavoritesPokemonsView: View {
   
   @Environment(\.dismiss) private var dismiss
   
-  var pokemon_vm: PokemonViewModel
+  let pokemon_vm: PokemonViewModel
   
   var body: some View {
-    NavigationStack{
-      VStack{
+    VStack{
+      if pokemon_vm.favoritesIsLoading {
+        ProgressView()
+      } else {
         if pokemon_vm.favoritesPokemons.isEmpty {
-          Text("Aucun pokémon favoris pour le moments.")
+          Text("Aucun pokemon favoris actuellement.")
         } else {
           ScrollView{
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
@@ -43,26 +45,26 @@ struct FavoritesPokemonsView: View {
           }
         }
       }
-      .navigationBarBackButtonHidden(true)
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar{
-        ToolbarItem(placement: .topBarLeading) {
-          Button(action: { dismiss() }) {
-            Image(systemName: "chevron.left")
-              .tint(.white)
-              .bold()
-          }
-        }
-        ToolbarItem(placement: .principal) {
-          Text("Favoris")
-            .foregroundStyle(.white)
-            .font(.title3)
+    }
+    .navigationBarBackButtonHidden(true)
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbar{
+      ToolbarItem(placement: .topBarLeading) {
+        Button(action: { dismiss() }) {
+          Image(systemName: "chevron.left")
+            .tint(.white)
             .bold()
         }
       }
-      .toolbarBackground(.red, for: .navigationBar)
-      .toolbarBackground(.visible, for: .navigationBar)
-      .padding()
+      ToolbarItem(placement: .principal) {
+        Text("Favoris")
+          .foregroundStyle(.white)
+          .font(.title3)
+          .bold()
+      }
     }
+    .toolbarBackground(.red, for: .navigationBar)
+    .toolbarBackground(.visible, for: .navigationBar)
+    .padding()
   }
 }
