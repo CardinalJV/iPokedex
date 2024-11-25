@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,6 +33,10 @@
 		A7C9CB8D2C8779FD00A8FC45 /* StatsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsItem.swift; sourceTree = "<group>"; };
 		A7F0F7A02C8997DB0037BA95 /* FavoritesPokemonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPokemonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A74CC6B02CF0FBB100AE5872 /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A7534AD52C86226D0086BC64 /* Frameworks */ = {
@@ -66,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				A7534ADB2C86226D0086BC64 /* PokedexApp.swift */,
+				A74CC6B02CF0FBB100AE5872 /* Models */,
 				A7534AED2C8623220086BC64 /* Assets */,
 				A7534AEE2C8623380086BC64 /* Components */,
 				A7B99B0F2C8C64C600EDD7CF /* ViewModels */,
@@ -133,6 +138,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A74CC6B02CF0FBB100AE5872 /* Models */,
 			);
 			name = Pokedex;
 			packageProductDependencies = (
