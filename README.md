@@ -24,15 +24,15 @@ Une liste interactive permet de naviguer parmi les Pokémon.
 Utilisation de async/await pour gérer les appels réseau.
 Les données des Pokémon sont récupérées et traitées via le PokemonViewModel.swift, qui gère la logique de récupération et de traitement des informations.
 
-- Gestion des favoris :
+- Gestion des favoris avec SwiftData :
   
-Les utilisateurs peuvent marquer leurs Pokémon préférés et les consulter dans la vue FavoritesPokemonsView.swift.
+Les utilisateurs peuvent enregistrer leurs pokémons favoris grace SwiftData.
 
 - Architecture MVVM :
   
 Le projet est structuré selon l'architecture MVVM pour une séparation claire entre la logique d'affichage (Vue) et la gestion des données (Modèle et ViewModel).
-Modèles : Le model est récupéré depuis un package externe, où les données des Pokémon sont modélisées.
-ViewModels : La logique métier et la récupération des données sont centralisées dans PokemonViewModel.swift.
+Le model est récupéré depuis un package externe, où les données des Pokémon sont modélisées.
+La logique métier et la récupération des données sont centralisées dans PokemonViewModel.swift.
 
 - Interface SwiftUI :
   
@@ -43,11 +43,11 @@ Les composants réutilisables, comme les cartes de Pokémon, permettent une navi
 ## Détails techniques
 
 - Langage : Swift
-- Frameworks : SwiftUI
+- Frameworks : SwiftUI / SwiftData
 - Architecture : MVVM (Model-View-ViewModel)
 - Récupération de données : Utilisation d'un package externe(Crédits: https://tyradex.vercel.app)
 - Version iOS supportée : iOS 14 et plus
 
 ## Installation
 
-Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vous que vous utilisez la dernière version de Xcode compatible avec Swift 5 et SwiftUI pour éviter tout problème de compatibilité.
+Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vous que vous utilisez la dernière version de Xcode compatible avec Swift 5, SwiftUI et SwiftData pour éviter tout problème de compatibilité.
