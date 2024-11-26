@@ -65,6 +65,7 @@ struct LandingView: View {
         if self.pokemon_vm.favoritesIsLoading {
           Spacer()
           ProgressView()
+            .tint(.red)
           Spacer()
         } else {
           ScrollView{
