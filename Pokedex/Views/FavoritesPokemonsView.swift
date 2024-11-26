@@ -20,7 +20,7 @@ struct FavoritesPokemonsView: View {
         ProgressView()
       } else {
         if pokemon_vm.favoritesPokemons.isEmpty {
-          Text("Aucun pokemon favoris actuellement.")
+          Text("Aucun Pokémon favori actuellement.")
         } else {
           ScrollView{
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10){
