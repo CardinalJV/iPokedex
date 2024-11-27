@@ -9,7 +9,7 @@ Pokedex est une application iOS native qui permet aux utilisateurs de consulter 
 
 ## ScreenCast
 
-https://github.com/user-attachments/assets/1a2a1d36-c31c-400e-9fdb-0354abed53da
+https://github.com/user-attachments/assets/511b9fdd-3bf1-4b6b-8411-65d43ab7e59b
 
 ## Fonctionnalités principales
 
