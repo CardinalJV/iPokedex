@@ -47,9 +47,13 @@ Les composants réutilisables, comme les cartes de Pokémon, permettent une navi
 - Langage : Swift
 - Frameworks : SwiftUI / SwiftData
 - Architecture : MVVM (Model-View-ViewModel)
-- Récupération de données : Utilisation d'un package externe(Crédits: https://tyradex.vercel.app)
+- Récupération de données : Utilisation d'un package externe
 - Version iOS supportée : iOS 14 et plus
 
 ## Installation
 
 Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vous que vous utilisez la dernière version de Xcode compatible avec Swift 5, SwiftUI et SwiftData pour éviter tout problème de compatibilité.
+
+## Crédits
+
+Toutes les données concernant les pokémons proviennent de l'API Tyradexkit.(https://tyradex.vercel.app)
