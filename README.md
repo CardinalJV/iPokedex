@@ -56,5 +56,5 @@ Clonez le projet depuis le dépôt GitHub, puis ouvrez-le dans Xcode. Assurez-vo
 
 ## Crédits
 
-Toutes les données concernant les pokémons proviennent de l'API Tyradexkit.
+Toutes les données concernant les pokémons proviennent de l'API Tyradexkit.<br/>
 https://tyradex.vercel.app
